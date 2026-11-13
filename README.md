@@ -25,7 +25,7 @@ MyPet is an academic web development project focused on making pet adoption easi
 ![Login Page](screenshots/Login.png)
 
 ### Favorite pets listing
-![Favorites Page](screenshots/favorites.png)
+![Favorites Page](screenshots/favourites.png)
 
 ### User Notifications
 ![Notifications Page](screenshots/notification.png)
