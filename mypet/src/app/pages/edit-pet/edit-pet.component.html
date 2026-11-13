@@ -1,0 +1,182 @@
+<div class="edit-pet-page">
+  <div class="layout">
+    <app-side-bar></app-side-bar>
+
+    <main class="main">
+      <div class="form-card">
+        <!-- Loading -->
+        <div *ngIf="isFetching" class="fetching-state">
+          <div class="spinner"></div>
+          <p>Loading pet information...</p>
+        </div>
+
+        <div *ngIf="!isFetching">
+          <h1>
+            <span class="material-icons back-btn" (click)="onCancel()">arrow_back</span>
+            Edit {{ pet?.name || 'Pet' }}
+          </h1>
+
+          <!-- Alerts -->
+          <div *ngIf="successMessage" class="alert success">{{ successMessage }}</div>
+          <div *ngIf="errorMessage" class="alert error">{{ errorMessage }}</div>
+
+          <form *ngIf="pet" [formGroup]="petForm" (ngSubmit)="onUpdatePet()">
+            <!-- PHOTOS -->
+            <section class="section photos">
+              <h2>Photos</h2>
+              <div class="photos-info">
+                <small>{{ existingPhotosCount }} existing • {{ selectedFiles.length }} new</small>
+              </div>
+
+              <label class="upload-box" for="pet-photos"
+                (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                <input type="file" id="pet-photos" multiple accept="image/*" (change)="onFileSelected($event)" hidden />
+                <div class="upload-icon"><span class="material-icons">cloud_upload</span></div>
+                <p><span>Click to upload</span> or drag and drop</p>
+                <small>Max 1MB per photo. JPG, PNG, GIF, WebP</small>
+              </label>
+              
+              <div *ngIf="uploadedPhotos.length" class="photo-previews">
+                <h3>All Photos ({{ uploadedPhotos.length }})</h3>
+                <div class="preview-grid">
+                  <div *ngFor="let photo of uploadedPhotos; let i = index" class="photo-preview">
+                    <img [src]="photo" alt="Pet photo" />
+                    <button type="button" class="remove-btn" (click)="removePhoto(i)">
+                      <span class="material-icons">close</span>
+                    </button>
+                    <div *ngIf="i < existingPhotosCount" class="existing-badge">Existing</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- BASIC INFO -->
+            <section class="section info">
+              <h2>Basic Information</h2>
+              
+              <div class="form-grid">
+                <!-- Name -->
+                <div class="form-group">
+                  <label for="pet-name">Pet Name *</label>
+                  <input id="pet-name" formControlName="name" placeholder="Enter pet name" [class.invalid]="name?.invalid && name?.touched" />
+                  <div *ngIf="name?.invalid && name?.touched" class="error-message">Name is required (2-50 chars)</div>
+                </div>
+
+                <!-- Species -->
+                <div class="form-group">
+                  <label for="species">Species *</label>
+                  <select id="species" formControlName="species">
+                    <option *ngFor="let opt of speciesOptions" [value]="opt">{{ opt }}</option>
+                  </select>
+                </div>
+
+                <!-- Breed -->
+                <div class="form-group">
+                  <label for="breed">Breed</label>
+                  <input id="breed" formControlName="breed" placeholder="e.g., Golden Retriever" />
+                </div>
+
+                <!-- Color -->
+                <div class="form-group">
+                  <label for="color">Color *</label>
+                  <input id="color" formControlName="color" placeholder="e.g., Brown" [class.invalid]="color?.invalid && color?.touched" />
+                  <div *ngIf="color?.invalid && color?.touched" class="error-message">Color is required</div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group full">
+                  <label for="description">Description *</label>
+                  <textarea id="description" rows="3" formControlName="description" placeholder="About your pet..." [class.invalid]="description?.invalid && description?.touched"></textarea>
+                  <small>{{ description?.value?.length || 0 }}/500</small>
+                </div>
+
+                <!-- Sex & Age -->
+                <div class="sex-age-row full">
+                  <div class="sex-field form-group">
+                    <label for="sex">Sex *</label>
+                    <select id="sex" formControlName="sex">
+                      <option *ngFor="let opt of sexOptions" [value]="opt">{{ opt }}</option>
+                    </select>
+                  </div>
+                  <div class="age-group form-group">
+                    <label>Age *</label>
+                    <div class="age-buttons">
+                      <button type="button" *ngFor="let opt of ageOptions" class="age-btn" [class.active]="selectedAge === opt.value" (click)="selectAge(opt.value)">
+                        {{ opt.label }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Characteristics -->
+                <div class="form-group full">
+                  <label>Characteristics</label>
+                  <div class="characteristics-container">
+                    <div class="characteristics-chips">
+                      <button type="button" *ngFor="let char of characteristicsOptions" class="char-chip" [class.active]="selectedCharacteristics.includes(char)" (click)="toggleCharacteristic(char)">
+                        {{ char }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- House Trained -->
+                <div class="form-group">
+                  <label>House Trained *</label>
+                  <div class="toggle-buttons">
+                    <button type="button" class="toggle-btn" [class.active]="petForm.get('houseTrained')?.value === true" (click)="setHouseTrained(true)">Yes</button>
+                    <button type="button" class="toggle-btn" [class.active]="petForm.get('houseTrained')?.value === false" (click)="setHouseTrained(false)">No</button>
+                  </div>
+                </div>
+
+                <!-- Adoption Fee -->
+                <div class="form-group">
+                  <label for="adoptionFee">Adoption Fee (TND) *</label>
+                  <input id="adoptionFee" type="number" formControlName="adoptionFee" min="0" [class.invalid]="adoptionFee?.invalid && adoptionFee?.touched" />
+                  <small>Enter 0 for free</small>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group full location-info">
+                  <label>Location</label>
+                  <div class="location-display">
+                    <span class="material-icons">location_on</span>
+                    <span *ngIf="userLocation">{{ userLocation.city }}, {{ userLocation.state }}</span>
+                    <span *ngIf="!userLocation" class="loading-location">Loading...</span>
+                  </div>
+                </div>
+
+                <!-- Weight -->
+                <div class="form-group">
+                  <label for="weight">Weight (kg)</label>
+                  <input id="weight" type="number" formControlName="weight" placeholder="e.g., 10" min="0.1" step="0.1" />
+                </div>
+
+                <!-- Medical Notes -->
+                <div class="form-group full">
+                  <label for="medical-notes">Medical Notes</label>
+                  <textarea id="medical-notes" rows="2" formControlName="medicalNotes" placeholder="Any medical conditions"></textarea>
+                </div>
+              </div>
+            </section>
+
+            <!-- Actions -->
+            <div class="actions">
+              <button type="button" class="btn-cancel" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+              <button type="submit" class="btn-update" [disabled]="petForm.invalid || isLoading" [class.loading]="isLoading">
+                {{ isLoading ? 'Updating...' : 'Update Pet' }}
+              </button>
+            </div>
+          </form>
+
+          <!-- Not found -->
+          <div *ngIf="!pet && !errorMessage" class="no-pet-state">
+            <div class="no-pet-icon">🐾</div>
+            <p>Pet not found or no permission to edit.</p>
+            <button class="btn-back" (click)="onCancel()">Back to Pets</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

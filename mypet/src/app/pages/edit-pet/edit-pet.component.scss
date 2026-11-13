@@ -1,0 +1,93 @@
+@import '../add-pet/add-pet.component.scss';
+
+.edit-pet-page {
+  .back-btn {
+    color: #6144FF;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 24px;
+    &:hover { color: #4f46e5; }
+  }
+
+  h1 { display: flex; align-items: center; gap: 10px; }
+
+  .fetching-state {
+    text-align: center;
+    padding: 3rem;
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top-color: #6144FF;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    p { color: #6b7280; }
+  }
+
+  .photos-info {
+    margin-bottom: 1rem;
+    small { color: rgba(255, 255, 255, 0.7); }
+  }
+
+  .photo-preview .existing-badge {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(59, 130, 246, 0.9);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+  }
+
+  .no-pet-state {
+    text-align: center;
+    padding: 3rem;
+    
+    .no-pet-icon { font-size: 3rem; margin-bottom: 1rem; }
+    p { color: #6b7280; margin-bottom: 1.5rem; }
+    
+    .btn-back {
+      background: #6144FF;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover { background: #4f46e5; }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    
+    .btn-cancel, .btn-update {
+      padding: 14px 32px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      transition: all 0.3s ease;
+      &:disabled { opacity: 0.5; cursor: not-allowed; }
+    }
+    
+    .btn-cancel {
+      background: #f3f4f6;
+      color: #374151;
+      &:hover:not(:disabled) { background: #e5e7eb; }
+    }
+    
+    .btn-update {
+      background: #6144FF;
+      color: white;
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.2);
+      &:hover:not(:disabled) { background: #059669; }
+    }
+  }
+}

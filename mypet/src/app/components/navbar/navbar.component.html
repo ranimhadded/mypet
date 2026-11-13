@@ -1,0 +1,57 @@
+<header class="nav-bar">
+  <nav class="container">
+    <a class="logo" href="#">
+      <span class="material-symbols-outlined logo-icon">pets</span>
+      <span class="logo-text">MyPet</span>
+    </a>
+
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#categories">Portfolio</a></li>
+    </ul>
+
+    <div class="actions">
+      <!-- 🔹 Search button emits to AppComponent -->
+      <button class="icon-btn"
+        *ngIf="showSearchButton"
+        (click)="onSearchClick()">
+  <span class="material-symbols-outlined">search</span>
+</button>
+
+  <!-- Favorites Button (only if logged in) -->
+  <button class="icon-btn" *ngIf="isLoggedIn" (click)="goToFavorites()">
+    <span class="material-symbols-outlined">favorite</span>
+  </button>
+
+  <!-- Cart Button (only if logged in) -->
+  <button class="icon-btn" *ngIf="isLoggedIn" (click)="goToCart()">
+    <span class="material-symbols-outlined">shopping_cart</span>
+  </button>
+  <button class="icon-btn" *ngIf="isLoggedIn" (click)="goToNotifications()" style="position: relative;">
+  <span class="material-symbols-outlined">notifications</span>
+
+  <span *ngIf="unreadCount > 0" 
+        class="notification-badge">
+    {{ unreadCount }}
+  </span>
+</button>
+
+
+      <div class="person-dropdown">
+        <!-- Person Icon -->
+        <button class="icon-btn" (click)="toggleDropdown($event)">
+          <span class="material-symbols-outlined">person</span>
+        </button>
+
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu" *ngIf="dropdownOpen">
+          <li *ngIf="!isLoggedIn" (click)="goToLogin()">Login</li>
+          <li *ngIf="isLoggedIn" (click)="goToSellerMode()">Seller Mode</li>
+          <li *ngIf="isLoggedIn" (click)="logOut()">LogOut</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,106 @@
+<div class="signup-page">
+  <main class="signup-container">
+    <div class="text-center">
+      <h1>Sign Up</h1>
+      <div class="avatar-upload">
+  <!-- Hidden File Input -->
+  <input type="file" #fileInput accept="image/*" (change)="onImageSelected($event)" hidden>
+
+  <!-- Avatar Circle -->
+  <div class="avatar-circle" (click)="fileInput.click()">
+    <img *ngIf="preview" [src]="preview" alt="avatar" />
+    <span *ngIf="!preview" class="material-symbols-outlined">add_photo_alternate</span>
+  </div>
+</div>
+
+    
+    </div>
+
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required ngModel autocomplete="name"/>
+      </div>
+
+      <!-- Title -->
+      <fieldset class="form-group title-group">
+  <div class="title-options">
+    <label class="title-option">
+      <input type="radio" name="title" value="Mr" checked ngModel />
+      Mr
+    </label>
+
+    <label class="title-option">
+      <input type="radio" name="title" value="Mrs" ngModel />
+      Mrs
+    </label>
+  </div>
+</fieldset>
+
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required ngModel autocomplete="email"/>
+      </div>
+
+      <!-- Company Name -->
+      <div class="form-group">
+        <label for="company-name">Company Name <span>(if you are a company)</span></label>
+        <input id="company-name" name="companyName" type="text" ngModel autocomplete="organization"/>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input id="address" name="address" type="text" ngModel autocomplete="street-address"/>
+      </div>
+
+      <!-- State & City -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="state">State</label>
+          <select id="state" name="state" ngModel>
+            <option>Select State</option>
+            <option>California</option>
+            <option>New York</option>
+            <option>Texas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <select id="city" name="city" ngModel>
+            <option>Select City</option>
+            <option>Los Angeles</option>
+            <option>New York City</option>
+            <option>Houston</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Postal -->
+      <div class="form-group">
+        <label for="postal">Postal</label>
+        <input id="postal" name="postal" type="text" ngModel autocomplete="postal-code"/>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" ngModel autocomplete="new-password"/>
+      </div>
+
+      <!-- Repeat Password -->
+      <div class="form-group">
+        <label for="repeat-password">Repeat Password</label>
+        <input id="repeat-password" name="repeatPassword" type="password" ngModel autocomplete="new-password"/>
+      </div>
+
+      <div class="form-group">
+        <button type="submit">Sign Up</button>
+      </div>
+    </form>
+  </main>
+</div>
+

@@ -1,0 +1,59 @@
+<div
+  class="category-card"
+  [ngClass]="{
+    'admin-variant': variant === 'admin',
+    'clickable': clickable
+  }"
+  [ngStyle]="{'background-color': bgColor}"
+  (click)="onCardClick($event)"
+>
+
+  <!-- ADMIN BUTTONS -->
+  <div class="admin-buttons" *ngIf="variant === 'admin'">
+  <button class="edit" (click)="onEditClick($event); $event.stopPropagation()">Edit</button>
+  <button class="remove" (click)="onDeleteClick($event); $event.stopPropagation()">Remove</button>
+</div>
+
+
+  <img [src]="imgSrc" class="card-image" />
+
+  <div class="card-content" [ngStyle]="{'background-color': contentBgColor}">
+    <h3>{{ title }}</h3>
+    <p *ngIf="subtitle">{{ subtitle }}</p>
+
+    <!-- USER BUTTONS -->
+    <div class="card-buttons" *ngIf="showActions">
+      <button class="btn-primary" (click)="onDetailClick($event)">Details</button>
+      
+      <!-- Cart Button -->
+      <button 
+        class="btn-secondary cart-btn" 
+        [class.in-cart]="inCart" 
+        [class.disabled]="!currentUser"
+        [class.processing]="isAddingToCart"
+        [disabled]="isAddingToCart"
+        (click)="toggleCart($event)"
+        [title]="inCart ? 'Remove from cart' : 'Add to cart'"
+      >
+        <span class="material-symbols-outlined">
+          {{ inCart ? 'shopping_cart' : 'add_shopping_cart' }}
+        </span>
+      </button>
+
+      <!-- Favorite Button -->
+      <button 
+        class="btn-secondary heart-btn" 
+        [class.liked]="liked" 
+        [class.disabled]="!currentUser"
+        [class.processing]="isProcessing"
+        [disabled]="isProcessing"
+        (click)="toggleLike($event)"
+      >
+        <span class="material-symbols-outlined">
+          {{ liked ? 'favorite' : 'favorite_border' }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+</div>

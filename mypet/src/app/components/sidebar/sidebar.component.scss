@@ -1,0 +1,110 @@
+.main-menu {
+  background: #ffca28;
+  border-right: 1px solid #e5e5e5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 70px;
+  width: 80px;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 1000;
+  .add-item {
+    margin-bottom: 20px; // space under Add button
+  }
+.add-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+
+    background: #6366f1; // purple highlight
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: background 0.25s ease, transform 0.15s ease;
+}
+  &.expanded {
+    width: 200px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 15px;
+    margin: 100px 0 0 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #FF740A;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(0,0,0,0.1);
+    }
+  }
+
+  i.material-icons {
+    font-size: 24px;
+    width: 36px;
+    text-align: center;
+  }
+
+  .nav-text {
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &.expanded .nav-text {
+    opacity: 1;
+  }
+
+  .logout {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffca28;
+    display: flex;
+    border: #ffca28;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 100;
+  }
+}

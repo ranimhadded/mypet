@@ -1,0 +1,112 @@
+<div class="body">
+  <section id="categories" class="categories">
+    <div class="categories-inner">
+      <!-- Header Section -->
+      <div class="header-section">
+        <h2 class="section-title">All <span class="yelloww">Pets</span></h2>
+      </div>
+
+      <!-- Statistics Section -->
+      <div *ngIf="allPets.length > 0">
+        <!--<div class="stats-grid">
+          <div class="stat-card total">
+            <span class="stat-number">{{ speciesStats.total }}</span>
+            <span class="stat-label">Total Pets</span>
+          </div>
+          <div class="stat-card dogs" (click)="filterBySpecies('dog')">
+            <span class="stat-number">{{ speciesStats.dogs }}</span>
+            <span class="stat-label">Dogs 🐶</span>
+          </div>
+          <div class="stat-card cats" (click)="filterBySpecies('cat')">
+            <span class="stat-number">{{ speciesStats.cats }}</span>
+            <span class="stat-label">Cats 🐱</span>
+          </div>
+          <div class="stat-card birds" (click)="filterBySpecies('bird')">
+            <span class="stat-number">{{ speciesStats.birds }}</span>
+            <span class="stat-label">Birds 🐦</span>
+          </div>
+          <div class="stat-card others" (click)="filterBySpecies('other')">
+            <span class="stat-number">{{ speciesStats.others }}</span>
+            <span class="stat-label">Others 🐾</span>
+          </div>
+        </div>-->
+        
+        <!-- Filter & Sort Controls -->
+        <div class="controls-section">
+          <div class="sort-controls">
+            <label>Sort by:</label>
+            <select (change)="sortPets($any($event.target).value)">
+              <option value="name">Name (A-Z)</option>
+              <option value="species">Species</option>
+              <option value="age">Age</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading all pets...</p>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage && !isLoading" class="error-state">
+        <div class="error-icon">⚠️</div>
+        <p>{{ errorMessage }}</p>
+        <button class="retry-btn" (click)="refreshPets()">Try Again</button>
+      </div>
+
+      <!-- No Pets Message -->
+      <div *ngIf="noPetsMessage && !isLoading && !errorMessage" class="no-pets-state">
+        <div class="no-pets-icon">🐾</div>
+        <p>{{ noPetsMessage }}</p>
+      </div>
+      <!-- Pets Grid -->
+      <div *ngIf="!isLoading && !errorMessage && allPets.length > 0" class="categories-grid">
+        <app-category-card
+  *ngFor="let pet of filteredPets; let i = index"
+  [title]="pet.name"
+  [subtitle]="getSpeciesIcon(pet.species) + ' ' + pet.species + ' • ' + getAgeCategory(pet.age)"
+  [imgSrc]="getPetImage(pet)"
+  [bgColor]="getPetColor(i).bg"
+  [contentBgColor]="getPetColor(i).content"
+  [petId]="pet.id"
+  variant="default"
+  [showActions]="true"
+  [showAdminButtons]="false"
+  (cardClick)="testClick(pet, 'card')"
+  (detailClick)="testClick(pet, 'button')"
+>
+          <!-- Additional pet info in the card content -->
+          <div class="pet-info" slot="additional-content">
+            <div class="pet-info-row">
+              <span class="pet-info-label">Owner:</span>
+              <span class="pet-info-value">{{ pet.ownerName || 'Unknown' }}</span>
+            </div>
+            <div class="pet-info-row">
+              <span class="pet-info-label">Sex:</span>
+              <span class="pet-info-value">{{ pet.sex }}</span>
+            </div>
+            <div *ngIf="pet.breed" class="pet-info-row">
+              <span class="pet-info-label">Breed:</span>
+              <span class="pet-info-value">{{ pet.breed }}</span>
+            </div>
+            <div class="pet-info-row">
+              <span class="pet-info-label">Added:</span>
+              <span class="pet-info-value">{{ pet.createdAt | date:'mediumDate' }}</span>
+            </div>
+          </div>
+        </app-category-card>
+      </div>
+
+      <!-- Pets Counter -->
+      <!--<div *ngIf="allPets.length > 0" class="pets-counter">
+        <span class="counter-number">{{ allPets.length }}</span>
+        <span class="counter-text">
+          {{ allPets.length === 1 ? 'pet' : 'pets' }} displayed
+        </span>
+      </div>-->
+    </div>
+  </section>
+</div>

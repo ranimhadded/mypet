@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0');
+
+$primary: #F97316;
+$primary-hover: #EA580C;
+$bg-light: #6331ff;
+$input-light: #FFFFFF;
+$border-light: #D1D5DB;
+$text-light: #111827;
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+app-side-bar {
+  width: 250px; // sidebar width
+  flex-shrink: 0;
+}
+
+.profile-container {
+  flex: 1; // takes the remaining space
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // optional, keep card at top
+  padding: 2rem;
+  background-color: $bg-light;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 2.5rem;
+  padding: 50px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04);
+  transition: all 0.3s;
+
+  .profile-header {
+    text-align: center;
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: $text-light;
+    }
+  }
+
+  .profile-avatar {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 2rem auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid lighten($border-light, 10%);
+    }
+
+    .edit-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: $primary;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      &:hover {
+        background-color: $primary-hover;
+        transform: scale(1.1);
+      }
+      span {
+        font-family: 'Material Symbols Outlined';
+        font-variation-settings: 'FILL' 1;
+        font-size: 18px;
+        color: white;
+      }
+    }
+  }
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid $border-light;
+      font-size: 0.9rem;
+      color: $text-light;
+      outline: none;
+      transition: all 0.2s;
+      &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 2px rgba($primary, 0.2);
+      }
+    }
+
+    .gender {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .location {
+      display: flex;
+      gap: 1rem;
+      select {
+        flex: 1;
+      }
+    }
+
+    .password-section {
+      margin-top: 1.5rem;
+      h3 {
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: darken($text-light, 20%);
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid lighten($border-light, 10%);
+        padding-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      input {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    button[type="submit"] {
+      margin-top: 1rem;
+      padding: 0.9rem 2.5rem;
+      border: none;
+      border-radius: 9999px;
+      background-color: $primary;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover {
+        background-color: $primary-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      }
+    }
+  }
+}

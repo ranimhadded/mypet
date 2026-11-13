@@ -1,0 +1,201 @@
+<div class="page">
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Loading pet details...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage && !isLoading" class="error-overlay">
+    <div class="error-content">
+      <div class="error-icon">⚠️</div>
+      <h3>Oops!</h3>
+      <p>{{ errorMessage }}</p>
+      <div class="error-actions">
+        <button class="btn-retry" (click)="reloadPet()">Try Again</button>
+        <button class="btn-back" (click)="goBack()">Back to All Pets</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="pet && !isLoading" class="main-grid">
+
+    <!-- LEFT COLUMN -->
+    <div class="left">
+
+      <!-- IMAGE CARD -->
+      <div class="image-card">
+        <div class="image-wrapper">
+          <img [src]="getCurrentImage()" [alt]="pet.name" />
+          
+          <ng-container *ngIf="pet.photos && pet.photos.length > 1">
+            <button class="nav-btn prev" (click)="previousImage()">‹</button>
+            <button class="nav-btn next" (click)="nextImage()">›</button>
+          </ng-container>
+        </div>
+
+        <div *ngIf="pet.photos && pet.photos.length > 1" class="dots">
+          <span *ngFor="let photo of pet.photos; let i = index" 
+                [class.active]="i === currentImageIndex"
+                (click)="selectImage(i)">
+          </span>
+        </div>
+
+        <div *ngIf="pet.photos.length" class="photo-count">
+          Photo {{ currentImageIndex + 1 }} of {{ pet.photos.length }}
+        </div>
+      </div>
+
+      <!-- OWNER CARD -->
+      <div class="owner-card">
+        <img class="avatar" [src]="pet.ownerPhoto || 'assets/user.png'" [alt]="pet.ownerName || 'Owner'" />
+
+        <div class="owner-info">
+          <h3>Pet's Owner</h3>
+          <p class="name">{{ pet.ownerName || 'Unknown Owner' }}</p>
+          <p class="meta">{{ getLocationString(pet.location) }}</p>
+
+          <div class="owner-stats">
+            <div class="stat">
+              <span class="stat-number">5</span>
+              <span class="stat-label">Pets</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">12</span>
+              <span class="stat-label">Reviews</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">98%</span>
+              <span class="stat-label">Rating</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" (click)="visitOwnerProfile()">Visit Profile</button>
+            <button class="outline" (click)="contactOwner()">Contact Owner</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Facts Card -->
+      <div class="info-card">
+        <h3>Quick Facts</h3>
+        <div class="facts-grid">
+          <div class="fact">
+            <span class="fact-label">Species</span>
+            <span class="fact-value">{{ pet.species }}</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Breed</span>
+            <span class="fact-value">{{ pet.breed || 'Mixed' }}</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Age</span>
+            <span class="fact-value">{{ formatAge(pet.age) }}</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Weight</span>
+            <span class="fact-value">{{ pet.weight ? pet.weight + ' kg' : 'N/A' }}</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Added</span>
+            <span class="fact-value">{{ pet.createdAt | date:'mediumDate' }}</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Last Updated</span>
+            <span class="fact-value">{{ pet.updatedAt | date:'mediumDate' }}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right">
+
+      <div class="details-card">
+
+        <button class="favorite" [class.favorited]="isFavorite" (click)="toggleFavorite()">
+          {{ isFavorite ? '♥' : '♡' }}
+        </button>
+
+        <h1>{{ pet.name }}</h1>
+
+        <div class="line">{{ pet.breed || pet.species }} · {{ getLocationString(pet.location) }}</div>
+        <div class="line">{{ formatAge(pet.age) }} · {{ pet.sex }} · {{ getSize() }} · {{ pet.color || 'N/A' }}</div>
+
+        <!-- About Section -->
+        <section>
+          <h3>About {{ pet.name }}</h3>
+
+          <div class="row">
+            <span>Description:</span>
+            <p>{{ pet.description || 'No description provided.' }}</p>
+          </div>
+
+          <div *ngIf="pet.medicalNotes" class="row">
+            <span>Medical Notes:</span>
+            <p>{{ pet.medicalNotes }}</p>
+          </div>
+
+          <div class="row">
+            <span>Characteristics:</span>
+            <p>{{ formatCharacteristics() }}</p>
+          </div>
+
+          <div class="row">
+            <span>House-trained:</span>
+            <p>{{ pet.houseTrained ? 'Yes' : 'No' }}</p>
+          </div>
+
+          <div class="row">
+            <span>Adoption fee:</span>
+            <p class="price">{{ pet.adoptionFee === 0 ? 'Free' : pet.adoptionFee + ' DT' }}</p>
+          </div>
+        </section>
+
+        <!-- Personality Section -->
+        <section>
+          <h3>Meet {{ pet.name }}</h3>
+          <p class="description">
+            {{ pet.description || 'This lovely pet is looking for a forever home. ' + 
+            pet.name + ' is a ' + formatAge(pet.age).toLowerCase() + ' ' + 
+            pet.species.toLowerCase() + ' who would make a wonderful companion.' }}
+          </p>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta">
+          <h4>Considering {{ pet.name }} for adoption?</h4>
+          <p class="cta-subtitle">This pet is currently <strong>available</strong> for adoption.</p>
+          
+          <div class="cta-buttons">
+        <button class="primary big" 
+        [class.in-cart]="inCart" 
+        [class.disabled]="!currentUser"
+        [class.processing]="isAddingToCart"
+        [disabled]="isAddingToCart"
+        (click)="toggleCart($event)"
+        [title]="inCart ? 'Remove from cart' : 'Add to cart'">Book Now</button>
+            <button class="secondary big" (click)="nextPet()">Next Pet</button>
+          </div>
+          
+          <div class="cta-info">
+            <p><span class="material-icons">info</span> 
+              Please contact the owner for more information about adoption process.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<app-footer *ngIf="pet && !isLoading"></app-footer>

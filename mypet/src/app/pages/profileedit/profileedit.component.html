@@ -1,0 +1,52 @@
+<div class="layout"> 
+    <app-side-bar></app-side-bar> 
+    <div class="profile-container"> 
+        <main class="profile-card"> 
+            <div class="profile-header"> 
+                <h1>User Profile</h1> 
+            </div> 
+            <div class="profile-avatar">
+  <img [src]="profilePhoto || defaultPhoto" alt="Profile Picture"/>
+  
+  <!-- Hidden file input -->
+  <input type="file" #fileInput accept="image/*" style="display:none" (change)="onFileSelected($event)"/>
+  
+  <!-- Edit button -->
+  <button class="edit-btn" (click)="fileInput.click()">
+    <span class="material-icons-round">edit</span>
+  </button>
+</div>
+
+                <form [formGroup]="profileForm" class="profile-form" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="Full Name" formControlName="displayName"/>
+  <input type="email" placeholder="Email Address" formControlName="email"/>
+  <input type="text" placeholder="Company Name" formControlName="companyName"/>
+  <input type="text" placeholder="Street Address" formControlName="address"/>
+  <div class="location">
+    <select formControlName="state">
+      <option>California</option>
+      <option>New York</option>
+      <option>Texas</option>
+      <option>Florida</option>
+    </select>
+    <select formControlName="city">
+      <option>Los Angeles</option>
+      <option>San Francisco</option>
+      <option>San Diego</option>
+      <option>Sacramento</option>
+    </select>
+  </div>
+  <input type="text" placeholder="Zip Code" formControlName="postal"/>
+
+  <div class="password-section">
+    <h3>Change Password</h3>
+    <input type="password" placeholder="New Password" formControlName="password"/>
+    <input type="password" placeholder="Repeat Password" formControlName="confirmPassword"/>
+  </div>
+
+  <button type="submit">Update Profile</button>
+</form>
+
+            </main> 
+        </div> 
+    </div>

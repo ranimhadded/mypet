@@ -1,0 +1,149 @@
+/* ---------------- GLOBAL ---------------- */
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.yellow {
+  color: #ffd93d;
+}
+
+.green {
+  color: #b7ff4a;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* ---------------- NAVIGATION ---------------- */
+
+.nav-bar {
+  background: #ffca28;
+  padding: 12px 0;
+ position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  .container {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+ .logo {
+    text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px; // space between text and icon
+
+  .logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FF740A;
+  }
+
+  .logo-icon {
+    font-size: 36px; // adjust size
+    color: #FF740A;     // same color as text
+  }
+}
+
+
+  .menu {
+    display: flex;
+    gap: 40px;
+list-style: none;
+    a {
+      color: #2c0d8b;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: 0.2s;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  .actions .icon-btn {
+    background: #ff8c00;
+    border-radius: 999px;
+    padding: 8px;
+    margin: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .person-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px; /* distance below icon */
+  right: 0;
+  background: white;
+  color: #333;
+  list-style: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 150px;
+  z-index: 100;
+}
+
+.dropdown-menu li {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 28px;
+  color: #333;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #F97316; // orange
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+}

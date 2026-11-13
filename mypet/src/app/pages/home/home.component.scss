@@ -1,0 +1,300 @@
+/* ---------------- GLOBAL ---------------- */
+.body{
+    background: #6331ff;
+    overflow-x: hidden;
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+p {
+  display: block;       // ensures each paragraph is a block element
+  margin: 12px 0;       // optional spacing between paragraphs
+  line-height: 1.2;     // optional for readability
+  white-space: normal;  // prevent nowrap
+}
+
+.yellow {
+  color: #000000;
+}
+.orange{
+  color: #FF740A 
+}
+.green {
+  color: #b7ff4a;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* ---------------- NAVIGATION ---------------- */
+
+.nav-bar {
+  background: #ffca28;
+  padding: 12px 0;
+
+  .container {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .logo-text {
+      font-size: 28px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .logo-icon {
+      font-size: 36px;
+      color: #222;
+    }
+  }
+
+  .menu {
+    display: flex;
+    gap: 40px;
+
+    a {
+      color: #222;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      transition: 0.2s;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+
+  .actions .icon-btn {
+    background: #ff8c00;
+    border-radius: 999px;
+    padding: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+}
+.primary-btn {
+  background: #ff8c00;
+  padding: 14px 26px;
+  border-radius: 40px;
+  font-weight: 500;
+  color: white;
+  margin-top: 28px;
+  margin-left: 150px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ---------------- HERO ---------------- */
+.hero {
+  padding-top: 50px;
+  text-align: center;
+  background: #6331ff;
+  color: white;
+  width: 100%;
+  position: relative;
+  padding-bottom: 35px;
+
+
+
+  .hero-photo-frame {
+    margin-top: 60px;
+  }
+  .hero-btn {
+    position: absolute;
+    top: 51%;       /* vertical position */
+    left: 50%;      /* horizontal position */
+    transform: translate(-50%, -50%); /* center exactly */
+    padding: 10px 36px;
+    background: #ff8c00;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+/* Hero image styling outside the hero block (or properly nested) */
+.hero img {
+
+  display: block;
+  max-width: 800px;   /* adjust the size */
+  width: 100%;        /* responsive */
+  height: auto;       /* maintain aspect ratio */
+  margin: 0 auto;     /* center horizontally */
+  border-radius: 20px; /* optional */
+}
+
+
+/* ---------------- ABOUT SECTION ---------------- */
+
+.about {
+  padding: 120px 0;
+  background: #7b4eff;
+  border-radius: 40px;
+  margin-top: 40px;
+  color: white;
+  overflow: hidden;
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+
+  .about-image-block {
+    position: relative;
+    width: 45%;
+    height: 420px;
+
+    img {
+      position: absolute;
+      object-fit: cover;
+      border-radius: 30px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .dog {
+      width: 70%;
+      bottom: 0;
+      left: 30px;
+    }
+
+    .cat {
+      width: 60%;
+      top: 0;
+      right: 0;
+      border-radius: 999px;
+    }
+  }
+
+  .about-text {
+    width: 55%;
+
+    h2 {
+      font-size: 50px;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 20px 0;
+      font-size: 18px;
+      width: 85%;
+    }
+
+    ul {
+      margin-top: 20px;
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .check {
+        color: #ffca28;
+      }
+    }
+
+    .primary-btn {
+      margin-top: 25px;
+    }
+  }
+}
+
+/* ---------------- CATEGORIES SECTION ---------------- */
+
+.categories {
+  margin-top: 80px;
+  padding: 100px 20px; /* horizontal padding for small screens */
+
+  .categories-inner{
+max-width: 1250px;      /* constrain width */
+    margin: 0 auto;          /* center */
+    background: #007AFF;     /* background only inside max width */
+    padding: 80px;           /* inner spacing */
+    border-radius: 40px;   
+    .yelloww {
+  color: #FFE167;
+  
+}
+.seeall{
+    text-align: right;
+    color: white;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  }
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1250px;
+    margin: auto;
+  }
+}
+
+/* ---------------- BOOK NOW SECTION ---------------- */
+
+.book-now {
+  padding: 20px 0;
+  background: #FFE167;
+  border-radius: 40px;
+  color: #FF740A;
+  display: flex;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  gap: 60px;
+
+  .book-content {
+    width: 50%;
+    margin-left: 50px;
+
+    h2 {
+      font-size: 55px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 20px 0;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+  }
+}
+

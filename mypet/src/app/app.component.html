@@ -1,0 +1,14 @@
+<app-navbar
+  [showSearchButton]="showSearchButton"
+  (searchToggle)="toggleSearch()">
+</app-navbar>
+
+<ng-container *ngIf="showSearch">
+  <app-search
+    [searchTerm]="searchTerm"
+    (searchTermChange)="onSearchTermChange($event)"
+    (close)="showSearch = false">
+  </app-search>
+</ng-container>
+
+<router-outlet></router-outlet>

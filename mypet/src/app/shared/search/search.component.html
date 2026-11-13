@@ -1,0 +1,12 @@
+<div class="search-bar">
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="onInputChange()"
+  placeholder="Search pets..."
+/>
+<button (click)="close.emit()">✕</button>
+
+</div>
+
+

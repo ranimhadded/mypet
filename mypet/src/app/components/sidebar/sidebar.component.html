@@ -1,0 +1,46 @@
+<nav class="main-menu" [class.expanded]="!isCollapsed">
+  <!-- TOGGLE BUTTON -->
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <span class="material-icons">
+      {{ isCollapsed ? 'chevron_right' : 'chevron_left' }}
+    </span>
+  </button>
+
+  <ul>
+    <li>
+      <button class="add-btn" routerLink="/addpet" >
+        <i class="material-icons">add</i>
+        <span class="nav-text">Add Pet</span>
+      </button>
+    </li>
+    <li>
+      <a routerLink="/petlist">
+        <i class="material-icons">home</i>
+        <span class="nav-text">Home</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/Mail">
+        <i class="material-icons">mail_outline</i>
+        <span class="nav-text">Mail</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="material-icons">settings</i>
+        <span class="nav-text">Settings</span>
+      </a>
+    </li>
+    
+  </ul>
+
+  <ul class="logout">
+  <li>
+    <a routerLink="/Profile">
+      <img [src]="userPhoto" class="avatar" alt="User Avatar"/>
+      <span class="nav-text">{{ userName }}</span>
+    </a>
+  </li>
+</ul>
+
+</nav>

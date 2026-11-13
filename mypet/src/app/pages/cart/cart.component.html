@@ -1,0 +1,117 @@
+<div class="cart-page">
+
+  <!-- Header -->
+  <header class="cart-header">
+    <h1>Your Cart</h1>
+    <span class="item-count" *ngIf="cartItems.length > 0">{{ cartItems.length }} Item{{ cartItems.length !== 1 ? 's' : '' }}</span>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading your cart...</p>
+  </div>
+
+  <!-- Error State 
+  <div *ngIf="errorMessage && !isLoading" class="error-state">
+    <span class="material-symbols-outlined">error</span>
+    <p>{{ errorMessage }}</p>
+    <button *ngIf="errorMessage.includes('log in')" (click)="goToLogin()">Log In</button>
+  </div>-->
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-state">
+    <span class="material-symbols-outlined">check_circle</span>
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <!-- Empty Cart -->
+  <div *ngIf="!isLoading && !errorMessage && cartItems.length === 0 && !successMessage" class="empty-state">
+    <span class="empty-icon">🛒</span>
+    <h3>Your cart is empty</h3>
+    <p>Browse our pets and add some to your cart!</p>
+    <a routerLink="/All" class="browse-btn">Browse Pets</a>
+  </div>
+
+  <!-- Cart Content -->
+  <div class="cart-content" *ngIf="!isLoading && cartItems.length > 0">
+
+    <!-- Cart Items -->
+    <div class="cart-items">
+      <div
+        class="cart-item"
+        *ngFor="let item of cartItems; let i = index"
+        [ngStyle]="{ 'background-color': colorPalettes[i % colorPalettes.length].bg }"
+      >
+        <div class="item-image">
+          <img [src]="getPetImage(item)" [alt]="item.name" />
+        </div>
+        <div class="item-details">
+          <div class="info">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.species }} • {{ item.breed || 'Mixed' }} • {{ item.sex }}</p>
+            <p class="location">
+              <span class="material-icons-round">place</span>
+              {{ getLocationString(item) }}
+            </p>
+            <div class="price">{{ item.adoptionFee === 0 ? 'Free' : item.adoptionFee + ' DT' }}</div>
+          </div>
+          <div class="actions">
+            <button class="remove" (click)="removeItem(item)">
+              <span class="material-icons-outlined">delete</span>
+              Remove
+            </button>
+            <a [routerLink]="['/pet', item.id]" class="view-details">
+              <span class="material-icons-outlined">visibility</span>
+              View
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Continue Shopping -->
+      <div class="continue-shopping">
+        <a routerLink="/All">
+          <span class="material-icons-outlined">arrow_back</span>
+          Continue Shopping
+        </a>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <div class="summary-box">
+        <h2>Order Summary</h2>
+        <div class="summary-details">
+          <div class="row">
+            <span>Subtotal ({{ cartItems.length }} pet{{ cartItems.length !== 1 ? 's' : '' }})</span>
+            <span>{{ subtotal }} DT</span>
+          </div>
+          <div class="row">
+            <span>Processing Fee</span>
+            <span>8 Dt</span>
+          </div>
+        </div>
+
+        <div class="total">
+          <span>Total</span>
+          <span>{{ total }} DT</span>
+        </div>
+
+        <button 
+          class="checkout-btn" 
+          (click)="checkout()"
+          [disabled]="isCheckingOut || cartItems.length === 0"
+          [class.loading]="isCheckingOut"
+        >
+          <span *ngIf="!isCheckingOut">
+            Complete Adoption
+            <span class="material-icons-outlined">arrow_forward</span>
+          </span>
+          <span *ngIf="isCheckingOut">Processing...</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

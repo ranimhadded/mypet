@@ -1,0 +1,97 @@
+<div class="body">
+
+<!-- HERO SECTION -->
+<section class="hero">
+ <img src="assets/hero.png" alt="Pet">
+ <button class="hero-btn" (click)="goToLogin()">Get Started</button>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about">
+  <div class="about-image-block">
+    <img class="dog" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6CDhkMpc5Uu6oUKv1RXEgh9i-AaJQhppvO-2UIFVAB4QRSDq-YkpWZVZifvOmpxGT-9Uqzds19L7TU1nvscKKA5ZsEFHQk7aiOJuGp28mzpOfIQKdw4tZEerVdjwXiGZ2HS4hVz3-J2xJXv534Je4Ud9INNh3X59b-9mS23FOi_V2pfEvCqNjXKGXC6WeU2LVM_oH3YYysnQlPb6Z5CvLgrVD-mA7JAaBHssii24CTaLO-GR_x4wbaplsAsbVAq2lfuVoMJ_KCfk" />
+    <img class="cat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3QXAYZvPl47eYODGFOinPZUCMOvI9I-UCkaL09ptF3ylawB8Iw2Ki97Jrgw30-uqJQCTYPzxLVOWrYF3vkwJw7h0fQcuryyJPI4wEqTzgkwVPdK4BuYGrwHuhTo5-Rly-OBJNkyoNkMcfLBxSiL7NmRvBE8BwVWjiiHGo8Bh1ICPn0eJ9ZwN1uU3Sf-hQRLun0dN0TJLnVbyB3vgVi58od7ARm1Yftxw5H5QCp5dtqXZMXe9i_teSgreI7AWwNDkIQvDbYWAFPU" />
+  </div>
+
+  <div class="about-text">
+    <h2>About <span class="yellow">MyPet</span></h2>
+    <p>
+      MyPet the place where animal lovers meet!</p>
+      <p>Our platform connects people who want to buy, sell, or adopt pets.</p>
+     <p> MyPet makes it easy to discover pets, contact owners, and share your own listings all in a safe, friendly, and trusted environment
+    </p>
+
+   <ul>
+  <li>
+    <span class="material-symbols-outlined" style="vertical-align: middle; color:#ffca28;">check_circle</span>
+    Pet Marketplace Browse and find pets of all kinds
+  </li>
+  <li>
+    <span class="material-symbols-outlined" style="vertical-align: middle; color:#ffca28;">check_circle</span>
+    Pet Supplies Shop
+  </li>
+</ul>
+
+
+    <button class="primary-btn">Learn More</button>
+  </div>
+</section>
+<!-- CATEGORIES SECTION -->
+<section id="categories" class="categories">
+  <div class="categories-inner">
+    <h2 class="section-title">Top <span class="yelloww">Categories</span></h2>
+    <h3 class="seeall"><a routerLink="/All">See All </a></h3>
+    <div class="categories-grid">
+      <app-category-card 
+        title="Dog" 
+        imgSrc="assets/dogg.png"
+        bgColor="#F2B2B2"
+        contentBgColor="#F25F9E"
+        subtitle="Friendly pets">
+      </app-category-card>
+
+      <app-category-card 
+        title="Cat" 
+        imgSrc="assets/cat.png"
+        bgColor="#FFE167"
+        contentBgColor="#F79F5A"
+        subtitle="Cute companions">
+      </app-category-card>
+
+      <app-category-card 
+        title="Bird" 
+        imgSrc="assets/bird.png"
+        bgColor="#C8EDFD"
+        contentBgColor="#283275"
+        subtitle="Colorful friends">
+      </app-category-card>
+
+      <app-category-card 
+        title="Puppy" 
+        imgSrc="assets/fish.png"
+        bgColor="#A9F3B5"
+        contentBgColor="#4CD964"
+        subtitle="Aquatic pets">
+      </app-category-card>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK NOW SECTION -->
+<section class="book-now">
+  <div class="book-content">
+    <h2>
+      <span class="yellow">Book</span> <span class="orange">Now Online</span>
+    </h2>
+  
+    <button class="primary-btn">Book Now</button>
+  </div>
+
+  <div>
+    <img src="https://www.protexinvet.com/wp-content/uploads/2025/03/po-prefooter-dog.png" alt="service pets" />
+  </div>
+</section>
+<app-footer id="contact" ></app-footer>
+</div>
+
+

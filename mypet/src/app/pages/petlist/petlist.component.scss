@@ -1,0 +1,73 @@
+.add-pet-page {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+.body {
+  background: #6331ff;
+  margin-left: 150px;
+  margin-top: -100px;
+}
+.section-title {
+  text-align: left;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+}
+
+
+/* ---------------- CATEGORIES SECTION ---------------- */
+.categories {
+  margin-top: 10px;
+  padding: 10px 20px; /* horizontal padding for small screens */
+
+  .categories-inner{
+max-width: 1100px;      /* constrain width */
+    margin: 0 auto;          /* center */
+    background: #6331ff;     /* background only inside max width */
+    padding: 80px;           /* inner spacing */
+    border-radius: 40px;   
+    .yelloww {
+  color: #FFE167;
+  
+}
+  }
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 25px;
+}
+.pets-counter {
+  display: flex;               /* use flexbox */
+  justify-content: center;     /* center horizontally */
+  align-items: center;         /* center vertically if needed */
+  gap: 8px;                    /* optional spacing between number and text */
+  margin-top: 20px;            /* space above the counter */
+  font-size: 16px;
+  color: white;
+  text-align: center;          /* ensures text inside spans is centered */
+}
+
+}
+.admin-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+
+  .btn-edit {
+    background: #007aff;
+    color: white;
+  }
+
+  .btn-remove {
+    background: #ff3b30;
+    color: white;
+  }
+}
+
+/* Remove inner scrolling for normal page scroll */

@@ -1,0 +1,90 @@
+<!-- petlist.component.html -->
+<div class="petlist-page">
+  <div class="layout">
+    <app-side-bar></app-side-bar>
+
+    <div class="body">
+      <section id="categories" class="categories">
+        <div class="categories-inner">
+          <div class="header-section">
+            <h2 class="section-title">Your <span class="yelloww">Pets</span></h2>
+          </div>
+
+          <!-- Loading State -->
+          <div *ngIf="isLoading" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading your pets...</p>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage && !isLoading" class="error-state">
+            <div class="error-icon">⚠️</div>
+            <p>{{ errorMessage }}</p>
+            <button class="retry-btn" (click)="refreshPets()">Try Again</button>
+          </div>
+
+          <!-- No Pets Message -->
+          <div *ngIf="noPetsMessage && !isLoading && !errorMessage" class="no-pets-state">
+            <div class="no-pets-icon">🐾</div>
+            <p>{{ noPetsMessage }}</p>
+          </div>
+
+          <!-- Pets Grid -->
+          <div *ngIf="!isLoading && !errorMessage && pets.length > 0" class="categories-grid">
+            <div *ngFor="let pet of pets; let i = index" class="pet-card-wrapper">
+              <app-category-card
+                [title]="pet.name"
+                [subtitle]="getSpeciesIcon(pet.species) + ' ' + pet.species + ' • ' + formatAge(pet.age)"
+                [imgSrc]="getPetImage(pet)"
+                [bgColor]="getPetColor(i).bg"
+                [contentBgColor]="getPetColor(i).content"
+                [petId]="pet.id"
+                variant="admin"
+                [showActions]="false"
+                [showAdminButtons]="true"
+                (cardClick)="viewPetDetails(pet.id!)"
+                (editClick)="editPet(pet.id!)"
+                (deleteClick)="onDeletePet(pet.id!)"
+              >
+                <!-- Additional pet info in the card content -->
+                <div class="pet-info" slot="additional-content">
+                  <div class="pet-info-row">
+                    <span class="pet-info-label">Sex:</span>
+                    <span class="pet-info-value">{{ pet.sex }}</span>
+                  </div>
+                  <div class="pet-info-row" *ngIf="pet.breed">
+                    <span class="pet-info-label">Breed:</span>
+                    <span class="pet-info-value">{{ pet.breed }}</span>
+                  </div>
+                  <div class="pet-info-row">
+                    <span class="pet-info-label">Added:</span>
+                    <span class="pet-info-value">{{ pet.createdAt | date:'mediumDate' }}</span>
+                  </div>
+                </div>
+              </app-category-card>
+            </div>
+          </div>
+
+          <!-- Pets Counter -->
+          <div *ngIf="pets.length > 0" class="pets-counter">
+            <span class="counter-number">{{ pets.length }}</span>
+            <span class="counter-text">
+              {{ pets.length === 1 ? 'pet' : 'pets' }} in total
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Dialog -->
+  <app-confirmation-dialog
+    *ngIf="showDeleteDialog && petToDelete"
+    [title]="'Delete ' + petToDelete.name + '?'"
+    [message]="'Are you sure you want to delete ' + petToDelete.name + '? This action cannot be undone.'"
+    [confirmButtonText]="'Delete ' + petToDelete.name"
+    [isDeleting]="isDeleting"
+    (confirmed)="executeDelete()"
+    (cancelled)="cancelDelete()"
+  ></app-confirmation-dialog>
+</div>

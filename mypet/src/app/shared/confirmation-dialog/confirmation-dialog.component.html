@@ -1,0 +1,41 @@
+<div class="confirmation-dialog-overlay" (click)="onCancel()">
+  <div class="confirmation-dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3 class="dialog-title">{{ title }}</h3>
+      <button class="close-btn" (click)="onCancel()" [disabled]="isDeleting">
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+    
+    <div class="dialog-body">
+      <div class="warning-icon">
+        <span class="material-icons">warning</span>
+      </div>
+      <p class="dialog-message">{{ message }}</p>
+      
+      <div class="deleting-state" *ngIf="isDeleting">
+        <div class="spinner"></div>
+        <p>Deleting...</p>
+      </div>
+    </div>
+    
+    <div class="dialog-footer">
+      <button 
+        class="btn btn-cancel" 
+        (click)="onCancel()"
+        [disabled]="isDeleting"
+      >
+        {{ cancelButtonText }}
+      </button>
+      <button 
+        class="btn btn-confirm" 
+        (click)="onConfirm()"
+        [disabled]="isDeleting"
+        [style.background-color]="confirmButtonColor"
+      >
+        <span *ngIf="!isDeleting">{{ confirmButtonText }}</span>
+        <span *ngIf="isDeleting" class="deleting-text">Deleting...</span>
+      </button>
+    </div>
+  </div>
+</div>

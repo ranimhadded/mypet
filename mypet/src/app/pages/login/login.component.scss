@@ -1,0 +1,62 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6331ff; // page background
+  font-family: 'Times New Roman', serif;
+  position: relative;
+  color: #1e293b;
+a {
+  cursor: pointer;
+}
+
+  .login-container {
+    position: relative; // needed for absolute image positioning
+    max-width: 500px;
+    width: 80%;
+
+    .login-box {
+      background-color: #ffffff; // white form container
+      padding: 4rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      position: relative; // keep image on top of this
+      z-index: 1;
+      h1 { text-align: center; font-size: 2.5rem; margin-bottom: 2rem; }
+
+      form {
+        .form-group {
+          margin-bottom: 1.5rem;
+          label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+          input { width: 80%; padding: 0.5rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 1rem; }
+        }
+        button {
+          padding: 0.75rem 2rem; background-color: #ff7f2a; color: white; border-radius: 999px; border: none; cursor: pointer;
+          &:hover { opacity: 0.9; }
+        }
+        .button{
+            text-align: center;
+              .orange{
+    color: #ff7f2a;
+  }
+        .signup-text { text-align: center; margin-top: 1rem; font-size: 0.9rem;}}
+      }
+    }
+
+    .login-image {
+      position: absolute;
+      top: 180px; // move image slightly above container
+      right: -180px; // optional horizontal shift
+      z-index: 2; // higher than login-box
+      width: 300px;
+      height: auto;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+}

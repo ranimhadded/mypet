@@ -1,0 +1,79 @@
+<div class="body">
+  <section class="favorites-page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2 class="title">
+        My <span>Favorites</span>
+      </h2>
+
+      <!-- SEARCH TOGGLE -->
+      <div class="search-toggle">
+        <button class="icon-btn" (click)="showSearch = !showSearch">
+          <span class="material-symbols-outlined">
+            {{ showSearch ? 'close' : 'search' }}
+          </span>
+        </button>
+
+        <input
+          *ngIf="showSearch"
+          type="text"
+          placeholder="Search favorites..."
+          [(ngModel)]="searchQuery"
+          (input)="applyFilters()"
+        />
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div *ngIf="pets.length > 0" class="filters">
+      <select [(ngModel)]="selectedSpecies" (change)="applyFilters()">
+        <option value="">All species</option>
+        <option *ngFor="let s of speciesOptions" [value]="s">{{ s }}</option>
+      </select>
+
+      <select (change)="sortPets($any($event.target).value)">
+        <option value="name">A–Z</option>
+        <option value="age">Age</option>
+        <option value="newest">Newest</option>
+      </select>
+
+     
+    </div>
+
+    <!-- STATES -->
+    <div *ngIf="isLoading" class="state">Loading favorites…</div>
+
+    <div *ngIf="!isLoading && pets.length === 0" class="state">
+      No favorites yet 💔
+      <button (click)="goToAll()">Browse pets</button>
+    </div>
+
+    <div *ngIf="filteredPets.length === 0 && pets.length > 0" class="state">
+      No results 🔍
+    </div>
+
+    <!-- GRID -->
+    <div class="grid" *ngIf="filteredPets.length > 0">
+      <app-category-card
+        *ngFor="let pet of filteredPets; let i = index"
+        [title]="pet.name"
+        [subtitle]="getSpeciesIcon(pet.species) + ' ' + pet.species + ' • ' + formatAge(pet.age)"
+        [imgSrc]="getPetImage(pet)"
+        [bgColor]="getPetColor(i).bg"
+        [contentBgColor]="getPetColor(i).content"
+        [petId]="pet.id"
+        variant="default"
+        [showActions]="true"
+        (favoriteChange)="onFavoriteChange($event)"
+      >
+      </app-category-card>
+    </div>
+
+    <!-- COUNTER -->
+    <div *ngIf="pets.length > 0" class="counter">
+      {{ filteredPets.length }} / {{ pets.length }} favorites
+    </div>
+
+  </section>
+</div>
